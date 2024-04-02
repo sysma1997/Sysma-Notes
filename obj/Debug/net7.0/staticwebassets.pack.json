@@ -1,0 +1,61 @@
+{
+  "Files": [
+    {
+      "Id": "D:\\Programming\\sysma\\Porfolio\\WebAPI\\wwwroot\\assets\\others\\entry.txt",
+      "PackagePath": "staticwebassets\\assets\\others\\entry.txt"
+    },
+    {
+      "Id": "D:\\Programming\\sysma\\Porfolio\\WebAPI\\wwwroot\\assets\\others\\plugins.txt",
+      "PackagePath": "staticwebassets\\assets\\others\\plugins.txt"
+    },
+    {
+      "Id": "D:\\Programming\\sysma\\Porfolio\\WebAPI\\wwwroot\\example\\index.7c8b40f0f23a1b650b5a.js",
+      "PackagePath": "staticwebassets\\example\\index.7c8b40f0f23a1b650b5a.js"
+    },
+    {
+      "Id": "D:\\Programming\\sysma\\Porfolio\\WebAPI\\wwwroot\\example\\index.css",
+      "PackagePath": "staticwebassets\\example\\index.css"
+    },
+    {
+      "Id": "D:\\Programming\\sysma\\Porfolio\\WebAPI\\wwwroot\\example\\index.html",
+      "PackagePath": "staticwebassets\\example\\index.html"
+    },
+    {
+      "Id": "D:\\Programming\\sysma\\Porfolio\\WebAPI\\wwwroot\\index.155106bc538a3e93d364.js",
+      "PackagePath": "staticwebassets\\index.155106bc538a3e93d364.js"
+    },
+    {
+      "Id": "D:\\Programming\\sysma\\Porfolio\\WebAPI\\wwwroot\\index.css",
+      "PackagePath": "staticwebassets\\index.css"
+    },
+    {
+      "Id": "D:\\Programming\\sysma\\Porfolio\\WebAPI\\wwwroot\\index.html",
+      "PackagePath": "staticwebassets\\index.html"
+    },
+    {
+      "Id": "D:\\Programming\\sysma\\Porfolio\\WebAPI\\wwwroot\\runtime.a9e318a47af63191e170.js",
+      "PackagePath": "staticwebassets\\runtime.a9e318a47af63191e170.js"
+    },
+    {
+      "Id": "D:\\Programming\\sysma\\Porfolio\\WebAPI\\wwwroot\\vendors.107450f99c4d78d45112.js",
+      "PackagePath": "staticwebassets\\vendors.107450f99c4d78d45112.js"
+    },
+    {
+      "Id": "obj\\Debug\\net7.0\\staticwebassets\\msbuild.WebAPI.Microsoft.AspNetCore.StaticWebAssets.props",
+      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
+    },
+    {
+      "Id": "obj\\Debug\\net7.0\\staticwebassets\\msbuild.build.WebAPI.props",
+      "PackagePath": "build\\WebAPI.props"
+    },
+    {
+      "Id": "obj\\Debug\\net7.0\\staticwebassets\\msbuild.buildMultiTargeting.WebAPI.props",
+      "PackagePath": "buildMultiTargeting\\WebAPI.props"
+    },
+    {
+      "Id": "obj\\Debug\\net7.0\\staticwebassets\\msbuild.buildTransitive.WebAPI.props",
+      "PackagePath": "buildTransitive\\WebAPI.props"
+    }
+  ],
+  "ElementsToRemove": []
+}

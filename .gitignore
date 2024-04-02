@@ -1,0 +1,5 @@
+﻿.vs/
+wwwroot/*
+bin/
+ClientApp/node_modules/*
+ClientApp/package.json
