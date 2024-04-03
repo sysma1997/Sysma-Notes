@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.IdentityModel.Tokens;
 using Newtonsoft.Json.Linq;
 using System.IdentityModel.Tokens.Jwt;
 using WebAPI.Core.Shared;
@@ -37,16 +36,21 @@ namespace WebAPI.Controllers
             }
         }
         [AllowAnonymous]
-        [HttpGet("register/{tokenRaw}")]
-        public IActionResult getRegister(string tokenRaw)
+        [HttpPost("register/token")]
+        public IActionResult getRegister(JObject json)
         {
+            if (json["token"] == null)
+                return BadRequest("Token is required.");
+
+            string tokenRaw = json["token"].Value<string>();
+
             try
             {
                 var jwtHandler = new JwtSecurityTokenHandler();
                 var token = jwtHandler.ReadToken(tokenRaw) as JwtSecurityToken;
 
                 var data = token.Claims.First(claim => claim.Type == "data").Value;
-                JObject json = JObject.Parse(data);
+                json = JObject.Parse(data);
 
                 Models.User user = new User();
                 user.id = Guid.Parse(json["id"].Value<string>());

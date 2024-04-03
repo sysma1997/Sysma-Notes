@@ -1,4 +1,4 @@
-type Method = "GET" | "POST";
+type Method = "GET" | "POST" | "PUT" | "REMOVE";
 
 class ApiResponse {
     constructor(readonly status: number, readonly result: string) { }
@@ -12,8 +12,9 @@ class ApiResponse {
 }
 class Api {
     
-    static async Init(method: Method, api: string, body?: any, action?: any) {
+    static async Init(method: Method, api: string, body?: any, action?: (response: ApiResponse) => void) {
         let headers: HeadersInit = {
+            "Accept": "*/*",
             "Content-Type": "application/json; charset=utf-8;"
         };
         // token
@@ -33,3 +34,5 @@ class Api {
         return res;
     }
 }
+
+export { Api, ApiResponse };

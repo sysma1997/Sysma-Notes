@@ -1,5 +1,5 @@
 ﻿.vs/
 wwwroot/*
 bin/
-ClientApp/node_modules/*
-ClientApp/package.json
+Frontend/node_modules/*
+Frontend/package-lock.json

@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Programming\\sysma\\Porfolio\\WebAPI\\WebAPI.csproj": {}
+    "D:\\Programming\\Porfolio\\webApi\\WebAPI.csproj": {}
   },
   "projects": {
-    "D:\\Programming\\sysma\\Porfolio\\WebAPI\\WebAPI.csproj": {
+    "D:\\Programming\\Porfolio\\webApi\\WebAPI.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Programming\\sysma\\Porfolio\\WebAPI\\WebAPI.csproj",
+        "projectUniqueName": "D:\\Programming\\Porfolio\\webApi\\WebAPI.csproj",
         "projectName": "WebAPI",
-        "projectPath": "D:\\Programming\\sysma\\Porfolio\\WebAPI\\WebAPI.csproj",
-        "packagesPath": "C:\\Users\\INVENTSOFT\\.nuget\\packages\\",
-        "outputPath": "D:\\Programming\\sysma\\Porfolio\\WebAPI\\obj\\",
+        "projectPath": "D:\\Programming\\Porfolio\\webApi\\WebAPI.csproj",
+        "packagesPath": "C:\\Users\\sysma\\.nuget\\packages\\",
+        "outputPath": "D:\\Programming\\Porfolio\\webApi\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\INVENTSOFT\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\sysma\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -96,7 +96,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.403\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.101\\RuntimeIdentifierGraph.json"
         }
       }
     }

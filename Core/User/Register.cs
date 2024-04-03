@@ -42,7 +42,7 @@ namespace WebAPI.Core.User
             Shared.Gmail mail = new Gmail(configuration);
             mail.send(user.email, "Welcome to Sysma Notes",
                 $"Hi {user.name}.</br>" +
-                $"<a href=\"https://localhost:7011/api/user/register/{tokenRaw}\">" + 
+                $"<a href=\"https://localhost:44334/register/index.html?token={tokenRaw}\">" + 
                 "Click here</a> to validate user.");
         }
         public void save(Models.User user)

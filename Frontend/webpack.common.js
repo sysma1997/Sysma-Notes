@@ -9,13 +9,20 @@ const CopyPlugin = require("copy-webpack-plugin")
 module.exports = {
     entry: {
         index: "./src/pages/index.tsx",
+        "./register/index": "./src/pages/register/index.tsx"
     },
     plugins: [
         new HtmlWebpackPlugin({
-            title: "Home",
+            title: "Login",
             filename: "index.html",
             template: "./src/pages/index.html",
             chunks: ["index"]
+        }),
+        new HtmlWebpackPlugin({
+            title: "Register", 
+            filename: "register/index.html", 
+            template: "./src/pages/index.html", 
+            chunk: ["./register/index"]
         }),
 
         new MiniCssExtractPlugin(),
