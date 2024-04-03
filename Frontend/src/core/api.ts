@@ -17,7 +17,8 @@ class Api {
             "Accept": "*/*",
             "Content-Type": "application/json; charset=utf-8;"
         };
-        // token
+        const token = window.localStorage.getItem("token");
+        if (token) headers["Authorization"] = `Bearer ${token}`;
 
         const response = await fetch(`/api/${api}`, {
             method: method,

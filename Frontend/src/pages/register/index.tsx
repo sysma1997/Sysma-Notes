@@ -2,10 +2,10 @@ import React, { useState, useEffect } from "react";
 import ReactDOM from "react-dom/client";
 import Sha256 from "crypto-js/sha256"
 
-import { Api, ApiResponse } from "../../core/api"
+import { Api } from "../../core/api"
 import { ValidateEmail } from "../../core/utilities"
 
-import "./index.scss";
+import "../index.scss";
 
 document.title = "Register";
 
@@ -26,6 +26,7 @@ const Register = () => {
         const params = new URLSearchParams(window.location.search);
         const _token = params.get("token");
         if (_token) setToken("validateToken");
+        else return;
 
         setTimeout(async () => {
             const response = await Api.Init("POST", `user/register/token`, { token: _token });
@@ -70,7 +71,7 @@ const Register = () => {
         }
         if (password.length < 8) {
             setMessage("The password must be a minimum of 8 characters");
-            return
+            return;
         }
         setMessage("");
         isDisableButton(true);
@@ -91,7 +92,7 @@ const Register = () => {
     };
 
     return <div className="app">
-        <div className="register card">
+        <div className="appForm card">
             <header className="card-header">
                 <h3 className="card-header-title">Register</h3>
             </header>

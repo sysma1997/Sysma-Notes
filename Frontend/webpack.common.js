@@ -9,7 +9,8 @@ const CopyPlugin = require("copy-webpack-plugin")
 module.exports = {
     entry: {
         index: "./src/pages/index.tsx",
-        "./register/index": "./src/pages/register/index.tsx"
+        "./register/index": "./src/pages/register/index.tsx",
+        "./recoverPassword/index": "./src/pages/recoverPassword/index.tsx"
     },
     plugins: [
         new HtmlWebpackPlugin({
@@ -23,6 +24,12 @@ module.exports = {
             filename: "register/index.html", 
             template: "./src/pages/index.html", 
             chunk: ["./register/index"]
+        }),
+        new HtmlWebpackPlugin({
+            title: "RecoverPassword", 
+            filename: "recoverPassword/index.html", 
+            template: "./src/pages/index.html", 
+            chunk: ["./recoverPassword/index"]
         }),
 
         new MiniCssExtractPlugin(),

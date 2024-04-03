@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
 import ReactDOM from "react-dom/client";
+import Sha256 from "crypto-js/sha256";
 
-import { Api, ApiResponse } from "../core/api";
+import { Api } from "../core/api";
 
 import "./index.scss";
 
@@ -11,6 +12,21 @@ const App = () => {
     const [email, setEmail] = useState<string>("");
     const [password, setPassword] = useState<string>("");
     const [message, setMessage] = useState<string>("");
+    const [disableButton, isDisableButton] = useState<boolean>(false);
+
+    useEffect(() => {
+        const token = window.localStorage.getItem("token");
+        if (!token) return;
+
+        Api.Init("GET", "user/get", null, response => {
+            if (response.status != 200) {
+                window.localStorage.removeItem("token");
+                return;
+            }
+
+            console.log(JSON.parse(response.result));
+        });
+    }, []);
 
     const clickLogin = () => {
         if (email == "" ||
@@ -24,10 +40,25 @@ const App = () => {
             return;
         }
         setMessage("");
+        isDisableButton(true);
+
+        const body = {
+            email,
+            password: Sha256(password).toString()
+        };
+        Api.Init("POST", "user/login", body, response => {
+            isDisableButton(false);
+            if (response.status != 200) {
+                setMessage(response.result);
+                return;
+            }
+
+            window.localStorage.setItem("token", response.result);
+        });
     };
 
     return <div className="app">
-        <div className="login card">
+        <div className="appForm card">
             <header className="card-header">
                 <h3 className="card-header-title">Sysma Notes</h3>
             </header>
@@ -54,14 +85,16 @@ const App = () => {
                     </div>}
                     <div className="field">
                         <div className="control">
-                            <button className="button" onClick={clickLogin}>Login</button>
+                            <button className="button"
+                                disabled={disableButton}
+                                onClick={clickLogin}>Login</button>
                         </div>
                     </div>
                 </div>
             </div>
             <div className="card-footer">
                 <a className="card-footer-item" href="/register/index.html">Register</a>
-                <a className="card-footer-item" href="#">I forgot my password</a>
+                <a className="card-footer-item" href="/recoverPassword/index.html">I forgot my password</a>
             </div>
         </div>
     </div>;
