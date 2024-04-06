@@ -1,7 +1,6 @@
 const path = require("path")
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const MiniCssExtractPlugin = require("mini-css-extract-plugin")
-const CopyPlugin = require("copy-webpack-plugin")
 
 // Use this plugin to push backend code to servers like apache or nginx
 // const CopyPlugin = require("copy-webpack-plugin")
@@ -10,7 +9,10 @@ module.exports = {
     entry: {
         index: "./src/pages/index.tsx",
         "./register/index": "./src/pages/register/index.tsx",
-        "./recoverPassword/index": "./src/pages/recoverPassword/index.tsx"
+        "./recoverPassword/index": "./src/pages/recoverPassword/index.tsx", 
+
+        "./dashboard/index": "./src/pages/dashboard/index.tsx", 
+        "./dashboard/profile/index": "./src/pages/dashboard/profile/index.tsx"
     },
     plugins: [
         new HtmlWebpackPlugin({
@@ -20,24 +22,32 @@ module.exports = {
             chunks: ["index"]
         }),
         new HtmlWebpackPlugin({
-            title: "Register", 
-            filename: "register/index.html", 
-            template: "./src/pages/index.html", 
-            chunk: ["./register/index"]
+            title: "Register",
+            filename: "register/index.html",
+            template: "./src/pages/index.html",
+            chunks: ["./register/index"]
         }),
         new HtmlWebpackPlugin({
-            title: "RecoverPassword", 
-            filename: "recoverPassword/index.html", 
-            template: "./src/pages/index.html", 
-            chunk: ["./recoverPassword/index"]
+            title: "RecoverPassword",
+            filename: "recoverPassword/index.html",
+            template: "./src/pages/index.html",
+            chunks: ["./recoverPassword/index"]
         }),
 
-        new MiniCssExtractPlugin(),
-        /*new CopyPlugin({
-            patterns: [
-                { from: "./src/assets/others/entry.txt", to: "./assets/others/entry.txt" },
-            ]
-        })*/
+        new HtmlWebpackPlugin({
+            title: "Dashboard",
+            filename: "dashboard/index.html",
+            template: "./src/pages/index.html",
+            chunks: ["./dashboard/index"]
+        }),
+        new HtmlWebpackPlugin({
+            title: "Dashboard",
+            filename: "dashboard/profile/index.html",
+            template: "./src/pages/index.html",
+            chunks: ["./dashboard/profile/index"]
+        }),
+
+        new MiniCssExtractPlugin()
     ],
     output: {
         filename: "[name].[contenthash].js",

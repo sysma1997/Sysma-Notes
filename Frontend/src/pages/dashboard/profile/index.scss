@@ -1,0 +1,25 @@
+@charset "utf-8";
+@import "../../shared/global.scss";
+
+.profile {
+    width: 100%;
+    height: 91vh;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .pForm {
+        width: 50%;
+
+        .pfShow {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+        }
+
+        @media screen and (max-width: 1024px) {
+            width: 90%;
+        }
+    }
+}

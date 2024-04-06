@@ -41,7 +41,7 @@ namespace WebAPI.Core.User
             mail.send(user.email,
                 "Sysma Notes: Recover password",
                 $"Hi {user.name}.</br>" +
-                $"<a href=\"https://localhost:7011/recoverPassword?token={tokenRaw}\">" + 
+                $"<a href=\"https://localhost:44334/recoverPassword/index.html?token={tokenRaw}\">" + 
                 "Click here</a> to recover your password");
         }
         public void update(Guid id, string newPassword)

@@ -1,5 +1,6 @@
 ﻿.vs/
 wwwroot/*
 bin/
+obj/
 Frontend/node_modules/*
 Frontend/package-lock.json

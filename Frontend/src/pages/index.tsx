@@ -24,7 +24,7 @@ const App = () => {
                 return;
             }
 
-            console.log(JSON.parse(response.result));
+            window.location.href = "/dashboard/index.html";
         });
     }, []);
 
@@ -54,6 +54,7 @@ const App = () => {
             }
 
             window.localStorage.setItem("token", response.result);
+            window.location.href = "/dashboard/index.html";
         });
     };
 

@@ -8,7 +8,7 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 
 builder.Services.AddDbContext<WebAPI.Models.Context>();
-builder.Services.AddControllersWithViews().AddNewtonsoftJson(opt =>
+builder.Services.AddControllers().AddNewtonsoftJson(opt =>
 {
     opt.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
 });
@@ -35,7 +35,7 @@ builder.Services.AddAuthentication(opt =>
     };
 });
 
-ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
+//ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
 
 var app = builder.Build();
 
@@ -44,7 +44,7 @@ if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
-    app.UseHsts();
+    //app.UseHsts();
 }
 
 app.UseHttpsRedirection();
