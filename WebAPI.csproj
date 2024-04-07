@@ -36,6 +36,7 @@
     <Folder Include="Frontend\src\core\models\" />
     <Folder Include="Frontend\src\pages\dashboard\profile\" />
     <Folder Include="Frontend\src\pages\dashboard\shared\navbar\" />
+    <Folder Include="Frontend\src\pages\updateEmail\" />
     <Folder Include="Frontend\src\pages\recoverPassword\" />
     <Folder Include="wwwroot\" />
   </ItemGroup>

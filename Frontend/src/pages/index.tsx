@@ -93,10 +93,10 @@ const App = () => {
                     </div>
                 </div>
             </div>
-            <div className="card-footer">
+            <footer className="card-footer">
                 <a className="card-footer-item" href="/register/index.html">Register</a>
                 <a className="card-footer-item" href="/recoverPassword/index.html">I forgot my password</a>
-            </div>
+            </footer>
         </div>
     </div>;
 };

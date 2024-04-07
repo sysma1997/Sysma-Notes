@@ -181,15 +181,31 @@ namespace WebAPI.Controllers
         }
 
         [HttpPut("update")]
-        public IActionResult putUpdate(Models.User user)
+        public IActionResult putUpdate(JObject json)
         {
-            user.id = getId();
+            if (json["name"] == null || 
+                json["phone"] == null)
+            {
+                string message = "";
+
+                if (json["name"] == null)
+                    message += "Name is required.";
+                if (json["phone"] == null)
+                    message += ((json["name"] == null) ? "\n" : "") +
+                        "Phone is required.";
+
+                return BadRequest(message);
+            }
+
+            Guid id = getId();
+            string name = json["name"].Value<string>();
+            string phone = json["phone"].Value<string>();
 
             var update = new Core.User.Update(configuration, context);
             
             try
             {
-                update.basic(user);
+                update.basic(id, name, phone);
 
                 return Ok("User update success");
             } catch (Exception ex)
@@ -252,16 +268,21 @@ namespace WebAPI.Controllers
             }
         }
         [AllowAnonymous]
-        [HttpPut("update/email/{tokenRaw}")]
-        public IActionResult putUpdateEmail(string tokenRaw)
+        [HttpPut("update/email")]
+        public IActionResult putUpdateEmail(JObject json)
         {
+            if (json["token"] == null)
+                return BadRequest("Token is required");
+
+            string tokenRaw = json["token"].Value<string>();
+
             try
             {
                 var jwtHandler = new JwtSecurityTokenHandler();
                 var token = jwtHandler.ReadToken(tokenRaw) as JwtSecurityToken;
 
                 var data = token.Claims.First(c => c.Type == "data").Value;
-                JObject json = JObject.Parse(data);
+                json = JObject.Parse(data);
 
                 Guid id = Guid.Parse(json["id"].Value<string>());
                 string email = json["email"].Value<string>();

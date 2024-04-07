@@ -40,7 +40,7 @@ namespace WebAPI.Core.User
             Shared.Gmail mail = new Gmail(configuration);
             mail.send(user.email,
                 "Sysma Notes: Recover password",
-                $"Hi {user.name}.</br>" +
+                $"Hi {user.name}.<br />" +
                 $"<a href=\"https://localhost:44334/recoverPassword/index.html?token={tokenRaw}\">" + 
                 "Click here</a> to recover your password");
         }

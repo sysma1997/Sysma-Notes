@@ -10,6 +10,7 @@ module.exports = {
         index: "./src/pages/index.tsx",
         "./register/index": "./src/pages/register/index.tsx",
         "./recoverPassword/index": "./src/pages/recoverPassword/index.tsx", 
+        "./updateEmail/index": "./src/pages/updateEmail/index.tsx", 
 
         "./dashboard/index": "./src/pages/dashboard/index.tsx", 
         "./dashboard/profile/index": "./src/pages/dashboard/profile/index.tsx"
@@ -32,6 +33,12 @@ module.exports = {
             filename: "recoverPassword/index.html",
             template: "./src/pages/index.html",
             chunks: ["./recoverPassword/index"]
+        }),
+        new HtmlWebpackPlugin({
+            title: "UpdateEmail",
+            filename: "updateEmail/index.html",
+            template: "./src/pages/index.html",
+            chunks: ["./updateEmail/index"]
         }),
 
         new HtmlWebpackPlugin({

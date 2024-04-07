@@ -6,9 +6,10 @@ import { User } from "../../../../core/models/user"
 import "./index.scss";
 
 export const Navbar = (props: {
+    user: User, 
     setUser: Dispatch<SetStateAction<User>>
 }) => {
-    const [user, setUser] = useState<User>();
+    const { user, setUser } = props;
 
     useEffect(() => {
         Api.Init("GET", "user/get", null, response => {
@@ -23,7 +24,6 @@ export const Navbar = (props: {
             const jUser = JSON.parse(response.result);
             const user = new User(jUser.id, jUser.name, jUser.phone, jUser.email);
             setUser(user);
-            props.setUser(user);
         });
     }, []);
 

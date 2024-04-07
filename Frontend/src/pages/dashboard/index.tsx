@@ -14,7 +14,7 @@ const Dashboard = () => {
     const [user, setUser] = useState<User>();
 
     return <div className="app">
-        <Navbar setUser={setUser} />
+        <Navbar user={user} setUser={setUser} />
     </div>;
 };
 

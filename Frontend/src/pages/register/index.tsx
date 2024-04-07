@@ -161,9 +161,9 @@ const Register = () => {
                     </>)}
                 </div>
             </div>
-            <div className="card-footer">
+            <footer className="card-footer">
                 <a className="card-footer-item" href="/index.html">Login</a>
-            </div>
+            </footer>
         </div>
     </div>;
 };

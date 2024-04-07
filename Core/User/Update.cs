@@ -12,14 +12,14 @@ namespace WebAPI.Core.User
         {
         }
 
-        public void basic(Models.User userUpdate)
+        public void basic(Guid id, string name, string phone)
         {
-            Models.User user = context.Users.Where(u => u.id == userUpdate.id).FirstOrDefault();
+            Models.User user = context.Users.Where(u => u.id == id).FirstOrDefault();
             if (user == null)
                 throw new Exception("User not found");
 
-            user.name = userUpdate.name;
-            user.phone = userUpdate.phone;
+            user.name = name;
+            user.phone = phone;
 
             context.SaveChanges();
         }
@@ -65,8 +65,8 @@ namespace WebAPI.Core.User
 
             Shared.Gmail mail = new Gmail(configuration);
             mail.send(email, "Sysma Notes: Confirm update email",
-                $"Hi {user.name}.</br>" + 
-                $"<a href=\"https://localhost:7011/api/user/update/email/{tokenRaw}\">" + 
+                $"Hi {user.name}.<br />" + 
+                $"<a href=\"https://localhost:44334/updateEmail/index.html?token={tokenRaw}\">" + 
                 "Click here</a> to confirm update email.");
         }
         public void email(Guid id, string email)
