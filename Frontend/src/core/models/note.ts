@@ -13,7 +13,7 @@ export class Note {
         return new Note(this.id, title, this.description, this.date);
     }
     public setDescription(description: string): Note {
-        return new Note(this.id, this.title, this.description, this.date);
+        return new Note(this.id, this.title, description, this.date);
     }
     public setDate(date: Date): Note {
         return new Note(this.id, this.title, this.description, date);
