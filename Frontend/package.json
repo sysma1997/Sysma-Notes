@@ -1,6 +1,6 @@
 {
   "name": "template-webpack-react-multiple-page",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "license": "MIT",
   "scripts": {
     "watch": "webpack --watch --config webpack.dev.js",
@@ -45,6 +45,5 @@
     "webpack-dev-server": "^4.15.1",
     "webpack-merge": "^5.10.0"
   },
-  "repository": "git@github.com:sysma1997/porfolio.sysma1997.git",
   "author": "Sebastian Moreno Acero <sysma1997@gmail.com>"
 }

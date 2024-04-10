@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.7.34221.43
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebAPI", "WebAPI.csproj", "{A9D13F56-7B20-4709-8465-AA630AC7C040}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SysmaNotes", "SysmaNotes.csproj", "{A9D13F56-7B20-4709-8465-AA630AC7C040}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -14,6 +14,9 @@ This simple example is a Web API with login token oaut, sending mail for validat
 	}
 	```
 	[More information on how create app password in google](https://support.google.com/mail/answer/185833?hl=en#)
+* Create database sqlite:
+	* Open package manager console
+	* Create database `Update-Database`
 
 ## Features:
 
