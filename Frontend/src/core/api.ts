@@ -1,4 +1,4 @@
-type Method = "GET" | "POST" | "PUT" | "REMOVE";
+type Method = "GET" | "POST" | "PUT" | "DELETE";
 
 class ApiResponse {
     constructor(readonly status: number, readonly result: string) { }

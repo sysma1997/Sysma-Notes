@@ -46,7 +46,7 @@ namespace WebAPI.Controllers
             {
                 add.init(note);
 
-                return StatusCode(201);
+                return StatusCode(201, "Note add success");
             } catch (Exception ex)
             {
                 return BadRequest(ex.Message);

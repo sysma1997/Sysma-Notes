@@ -41,4 +41,8 @@
     <Folder Include="wwwroot\" />
   </ItemGroup>
 
+  <Target Name="PreBuild" BeforeTargets="PreBuildEvent">
+    <Exec Command="cd .\Frontend\&#xD;&#xA;npm run build" />
+  </Target>
+
 </Project>

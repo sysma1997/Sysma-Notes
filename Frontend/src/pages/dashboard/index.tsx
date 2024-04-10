@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, ChangeEvent } from "react";
 import ReactDOM from "react-dom/client";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch, faAdd, faTrash } from "@fortawesome/free-solid-svg-icons";
@@ -22,9 +22,14 @@ const Dashboard = () => {
         isSelect: boolean,
         note: Note
     }>>([]);
+    const [listOriginal, setListOriginal] = useState<Array<{
+        isSelect: boolean,
+        note: Note
+    }>>([]);
     const [item, setItem] = useState<Note>();
     const [itemOriginal, setItemOriginal] = useState<Note>();
-    const [titleMessage, setTitleMessage] = useState<string>("");
+
+    const [search, setSearch] = useState<string>("");
 
     const [modal, setModal] = useState<{
         show: boolean,
@@ -48,11 +53,96 @@ const Dashboard = () => {
                     moment(note.date, "YYYY-MM-DD'T'HH:mm").toDate())
             }));
             setList(notes);
+            setListOriginal(notes);
         });
     }, []);
 
+    const onChangeSearch = (element: ChangeEvent<HTMLInputElement>) => {
+        const value = element.target.value;
+        setSearch(value);
+
+        if (value == "") {
+            setList(listOriginal);
+            return;
+        }
+
+        setList(listOriginal.filter(item => item.note.title.indexOf(value) != -1));
+    };
     const clickCreateNote = () => {
+        if (item) {
+            if (itemOriginal) {
+                if (item.title != itemOriginal.title ||
+                    item.description != itemOriginal.description ||
+                    item.date != itemOriginal.date) {
+                    let click = (con: boolean) => {
+                        setModal({ show: false });
+
+                        if (con) {
+                            setItem(new Note(uuid().toString(), "", "", new Date()));
+                            setItemOriginal(undefined);
+                        }
+                    };
+                    setModal({
+                        show: true,
+                        title: "Warning",
+                        message: "Will the changes made so far be lost?",
+                        buttons: <>
+                            <button className="button"
+                                onClick={() => click(false)}>No</button>
+                            <button className="button"
+                                onClick={() => click(true)}>Yes</button>
+                        </>
+                    });
+
+                    return;
+                }
+            }
+        }
+
         setItem(new Note(uuid().toString(), "", "", new Date()));
+        setItemOriginal(undefined);
+    };
+    const clickRemoveSelects = () => {
+        const click = (remove: boolean) => {
+            setModal({ show: false });
+            if (!remove) return;
+
+            const ids: Array<string> = list
+                .filter(item => item.isSelect)
+                .map(item => item.note.id);
+            Api.Init("DELETE", "note/remove", ids, response => {
+                setModal({
+                    show: true, 
+                    title: "Remove notes", 
+                    message: response.result
+                });
+
+                if (response.status == 200) {
+                    if (item) {
+                        const exists = ids.find(id => item.id == id);
+                        if (exists) {
+                            setItem(undefined);
+                            setItemOriginal(undefined);
+                        }
+                    }
+                    setList(list.filter(item => {
+                        const exists = ids.find(id => item.note.id == id);
+                        return !exists;
+                    }));
+                }
+            });
+        };
+        setModal({
+            show: true, 
+            title: "Warning", 
+            message: "Remove notes selected?", 
+            buttons: <>
+                <button className="button" 
+                    onClick={() => click(false)}>No</button>
+                <button className="button"
+                    onClick={() => click(true)}>Yes</button>
+            </>
+        });
     };
     const clickNote = (id: string) => {
         Api.Init("GET", `note/get/item/${id}`, null, response => {
@@ -112,23 +202,82 @@ const Dashboard = () => {
         setItemOriginal(undefined);
     };
     const clickRemove = (id: string) => {
-        
+        const click = (remove: boolean) => {
+            setModal({ show: false });
+            if (!remove) return;
+
+            Api.Init("DELETE", `note/remove/${id}`, null, response => {
+                setModal({
+                    show: true, 
+                    title: "Remove note", 
+                    message: response.result
+                });
+
+                if (response.status == 200) {
+                    setItem(undefined);
+                    setItemOriginal(undefined);
+                    setList(list.filter(item => item.note.id != id));
+                }
+            });
+        };
+        setModal({
+            show: true,
+            title: "Warning", 
+            message: "Remove this note?", 
+            buttons: <>
+                <button className="button"
+                    onClick={() => click(false)}>No</button>
+                <button className="button"
+                    onClick={() => click(true)}>Yes</button>
+            </>
+        });
     };
     const clickSave = () => {
-        if (item.title == "") {
-            setTitleMessage("The title is required.");
+        if (item.title == "" || 
+            item.description == "") {
+            let message = "";
+            
+            if (item.title == "") message += "Title";
+            if (item.description == "") message += ((item.title == "") ? " and description are " : "Description is ");
+
+            setModal({ show: true, title: "Warning", message: message + "required" });
+
             return;
         }
-        setTitleMessage("");
 
         Api.Init("POST", "note/add", item.toMap(), response => {
-            if (response.status != 201) {
-                setModal({ show: true, title: "Error", message: response.result });
-                return;
-            }
+            setModal({ show: true, title: "Note", message: response.result });
 
-            setItemOriginal(item);
-            setModal({ show: true, title: "Note add", message: "Note add successfully" });
+            if (response.status == 201) {
+                setItemOriginal(item);
+                setList([{ isSelect: false, note: item }, ...list]);
+            }
+        });
+    };
+    const clickUpdate = () => {
+        if (item.title == "" || 
+            item.description == "") {
+            let message = "";
+
+            if (item.title == "") message += "Title";
+            if (item.description == "") message += ((item.title == "") ? " and description are " : "Description is ");
+
+            setModal({ show: true, title: "Warning", message: message + "required" });
+            return;
+        }
+
+        Api.Init("PUT", "note/update", item.toMap(), response => {
+            setModal({ show: true, title: "Note", message: response.result });
+
+            if (response.status == 200) {
+                setItemOriginal(item);
+                setList(list.map(itm => {
+                    if (itm.note.id == item.id)
+                        return { isSelect: false, note: item };
+
+                    return itm;
+                }));
+            }
         });
     };
 
@@ -139,7 +288,8 @@ const Dashboard = () => {
                 <div className="commands">
                     <div className="field has-addons">
                         <div className="control has-icons-right">
-                            <input className="input" type="search" placeholder="Search" />
+                            <input className="input" type="search" placeholder="Search"
+                                value={search} onChange={onChangeSearch} />
                             <FontAwesomeIcon className="icon is-small is-right"
                                 icon={faSearch} style={{
                                     width: "1.3rem", 
@@ -153,19 +303,20 @@ const Dashboard = () => {
                             </button>
                         </div>
                         {(list.findIndex(i => i.isSelect) != -1) && <div className="control">
-                            <button className="button">
+                            <button className="button"
+                                onClick={clickRemoveSelects}>
                                 <FontAwesomeIcon icon={faTrash} color="red" />
                             </button>
                         </div>}
                     </div>
                 </div>
                 {(list.length > 0) && <ul className="notes">
-                    {list.map(item => <li key={item.note.id} className="note"
-                        onClick={() => clickNote(item.note.id)}>
+                    {list.map(item => <li key={item.note.id} className="note">
                         <input type="checkbox"
                             checked={item.isSelect}
                             onChange={_ => onChangeSelect(item.note.id)} />
-                        <div className="info">
+                        <div className="info"
+                            onClick={() => clickNote(item.note.id)}>
                             <label>{item.note.title}</label>
                             <small>{moment(item.note.date).format("DD/MM/YYYY HH:mm")}</small>
                         </div>
@@ -182,7 +333,6 @@ const Dashboard = () => {
                                 value={item.title}
                                 onChange={element => setItem(item.setTitle(element.target.value))} />
                         </div>
-                        {(titleMessage != "") && <p className="help">{titleMessage}</p>}
                     </div>
                     <textarea className="textarea" placeholder="Description"
                         value={item.description}
@@ -204,7 +354,12 @@ const Dashboard = () => {
                             {(itemOriginal) && <button className="button"
                                 onClick={() => clickRemove(item.id)}>Remove</button>}
                             <button className="button"
-                                onClick={clickSave}>Save</button>
+                                onClick={() => {
+                                    if (!itemOriginal) clickSave();
+                                    else clickUpdate();
+                                }}>
+                                {(!itemOriginal) ? "Save" : "Update"}
+                            </button>
                         </div>
                     </div>
                 </div> || <div className="noItem">
