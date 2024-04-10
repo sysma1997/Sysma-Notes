@@ -4,7 +4,16 @@ This simple example is a Web API with login token oaut, sending mail for validat
 
 ## Requirements
 
-* NodeJs install in your computer or [install NodeJs](https://learn.microsoft.com/en-us/visualstudio/javascript/tutorial-nodejs?view=vs-2022#prerequisites) in visual studio
+* NodeJs install in your computer
+* Add secrets.json in gmail configuration project to send emails:
+	* Click right in Solution in solution explorer -> Manage user secrets:
+	```json
+	{
+		"Gmail:User": "<email>",
+		"Gmail:Password": "<password>"
+	}
+	```
+	[More information on how create app password in google](https://support.google.com/mail/answer/185833?hl=en#)
 
 ## Features:
 
@@ -17,9 +26,6 @@ This simple example is a Web API with login token oaut, sending mail for validat
 	* Open "Developer PowerSheel" in Visual studio or open terminal in root project
 	* Go to "Frontend" folder `cd .\Frontend\`
 	* Install dependencies `npm install`
-* With Visual studio:
-	* Deploy Dependencies:
-	* select npm and click right -> Install new npm packages [more info](https://learn.microsoft.com/en-us/visualstudio/javascript/npm-package-management?view=vs-2022#cli-based-project-esproj)
 
 ## Compile Frontend:
 
@@ -27,4 +33,4 @@ This simple example is a Web API with login token oaut, sending mail for validat
 	* Go to "Frontend" folder `cs .\Frontend\`
 	* Build project frontend `npm run build`
 		* If build dev `npm run build-dev`
-		* If edite project frontend `npm run watch`
+		* If you want to edit project frontend `npm run watch`
